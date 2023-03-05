@@ -25,6 +25,10 @@ def getProcesses(procLen):
     
     return procList
 
+def sortByArrivalTime(processes):
+    sorted_processes = sorted(processes, key=lambda procInfo:procInfo[1])
+    return sorted_processes
+
 def main():
     try:
         terminated = False
@@ -34,7 +38,8 @@ def main():
             algID, procLen, timeSlice = list(map(int,input(">> ").strip().split(' ')))
             if algID == 0:
                 processes = getProcesses(procLen)
-                FCFSModule.computeFCFS(processes, timeSlice)
+                sorted_processes = sortByArrivalTime(processes)
+                FCFSModule.computeFCFS(sorted_processes, procLen)
             elif algID == 1:
                 print("SJF")
             elif algID == 2:
